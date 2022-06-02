@@ -34,7 +34,14 @@ def home():
 #endponit para obtener la lista de usuarios
 @app.get('/api/users')
 def get_users():
-    return('getting users')
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=extras.RealDictCursor) #para convertirlo en diccionario
+    cur.execute('SELECT * FROM users')
+    list_users=cur.fetchall()    
+    cur.close()
+    conn.close()
+    return jsonify(list_users)
+    #return('getting users')
 
 #endponit para insertar un usuario a la base de datos obtenidos desde el cliente metodo post 
 #Commit en git para identificar la creacion de usuarios
@@ -73,8 +80,15 @@ def update_users():
     return('updating users')
 
 #endponit para obtener la información de un solo usuario usando el metodo get y un id de referencia
-@app.get('/api/users/1')
-def getting_user():
+@app.get('/api/users/<id>')
+def getting_user(id):
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=extras.RealDictCursor) #para convertirlo en diccionario
+    cur.execute('SELECT * FROM users WHERE id=%s', (id,))
+    user=cur.fetchone()    
+    cur.close()
+    conn.close()
+    return jsonify(user)
     return('getting user 1')
 
 
