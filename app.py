@@ -1,5 +1,5 @@
-from flask import Flask, request
-from psycopg2 import connect
+from flask import Flask, request, jsonify
+from psycopg2 import connect, extras
 
 app = Flask(__name__)
 
@@ -45,15 +45,18 @@ def create_users():
 
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute('INSERT INTO users (username,email,password) VALUES (%s,%s,%s)',
+    cur.execute('INSERT INTO users (username,email,password) VALUES (%s,%s,%s) RETURNING *',
                 (username, email, password))
+    new_created_user=cur.fetchone()
     conn.commit()
     cur.close()
     conn.close()
 
+    return jsonify(new_created_user)
+   # print(username,email,password)
+   # return('creating users')
+   
 
-    # print(username,email,password)
-    return('creating users')
 
 #endponit para borrar un usuario a la base de datos obtenidos desde el cliente metodo delete y un id de referencia
 @app.delete('/api/users/1')
