@@ -70,9 +70,19 @@ def create_users():
 
 
 #endponit para borrar un usuario a la base de datos obtenidos desde el cliente metodo delete y un id de referencia
-@app.delete('/api/users/1')
-def delete_users():
-    return('deleting users')
+@app.delete('/api/users/<id>')
+def delete_users(id):
+    conn=get_connection()
+    cur=conn.cursor(cursor_factory=extras.RealDictCursor)
+    cur.execute('DELETE FROM users WHERE id=%s RETURNING *',(id,))
+    user_deleted=cur.fetchone()
+    conn.commit()
+    cur.close()
+    conn.close()
+    if user_deleted is None:
+        return jsonify({'message':'user not found'}),404
+    return jsonify(user_deleted)
+    #return('deleting users')
 
 #endponit para actualizar un usuario a la base de datos obtenidos desde el cliente metodo put y un id de referencia
 @app.put('/api/users/1')
