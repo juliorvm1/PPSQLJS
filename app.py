@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from psycopg2 import connect, extras
 from cryptography.fernet import Fernet
 
@@ -129,6 +129,12 @@ def getting_user(id):
     conn.close()
     return jsonify(user)
     return('getting user 1')
+
+
+@app.get('/')
+def home():
+    return send_file('static/index.html')
+
 
 
 if __name__ == '__main__':
