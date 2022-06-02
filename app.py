@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 from psycopg2 import connect, extras
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
+key=Fernet.generate_key()
+
 
 #datos de conexión a la base de datos postgres
 host = 'localhost'
@@ -41,7 +44,8 @@ def create_users():
     new_user = request.get_json()
     username = new_user['username']
     email = new_user['email']
-    password = new_user['password']
+    password=Fernet(key).encrypt(bytes(new_user['password'], 'utf-8'))
+    #password = new_user['password']
 
     conn = get_connection()
     cur = conn.cursor()
