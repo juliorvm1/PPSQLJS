@@ -85,7 +85,9 @@ def getting_user(id):
     conn = get_connection()
     cur = conn.cursor(cursor_factory=extras.RealDictCursor) #para convertirlo en diccionario
     cur.execute('SELECT * FROM users WHERE id=%s', (id,))
-    user=cur.fetchone()    
+    user=cur.fetchone() 
+    if user is None:
+        return jsonify({'message':'user not found'}), 404
     cur.close()
     conn.close()
     return jsonify(user)
