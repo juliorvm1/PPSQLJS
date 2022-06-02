@@ -33,7 +33,8 @@ def home():
 def get_users():
     return('getting users')
 
-#endponit para insertar un usuario a la base de datos obtenidos desde el cliente metodo post
+#endponit para insertar un usuario a la base de datos obtenidos desde el cliente metodo post 
+#Commit en git para identificar la creacion de usuarios
 @app.post('/api/users')
 def create_users():
     # print(request.get_json())
