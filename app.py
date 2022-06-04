@@ -60,7 +60,8 @@ def create_users():
     #password = new_user['password']
 
     conn = get_connection()
-    cur = conn.cursor()
+    #cur = conn.cursor()
+    cur = conn.cursor(cursor_factory=extras.RealDictCursor)
     cur.execute('INSERT INTO users (username,email,password) VALUES (%s,%s,%s) RETURNING *',
                 (username, email, password))
     new_created_user = cur.fetchone()
@@ -69,6 +70,7 @@ def create_users():
     conn.close()
 
     return jsonify(new_created_user)
+    
    # print(username,email,password)
    # return('creating users')
 
@@ -103,12 +105,12 @@ def update_users(id):
         bytes(update_user['password'], 'utf-8'))
     cur.execute('UPDATE users SET username=%s, email=%s, password=%s WHERE id=%s RETURNING *',
                 (new_user_name, new_user_email, new_user_password, id))
-    updated_user=cur.fetchone()
+    updated_user = cur.fetchone()
     conn.commit()
     cur.close()
     conn.close()
     if updated_user is None:
-        return jsonify({'message':'user not found'}, 404)
+        return jsonify({'message': 'user not found'}, 404)
     return jsonify(updated_user)
 
     return('updating users')
@@ -134,7 +136,6 @@ def getting_user(id):
 @app.get('/')
 def home():
     return send_file('static/index.html')
-
 
 
 if __name__ == '__main__':
