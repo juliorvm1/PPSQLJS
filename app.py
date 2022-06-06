@@ -12,6 +12,7 @@ key = Fernet.generate_key()
 
 
 # datos de conexión a la base de datos postgres
+#comentario de prueba
 """host = 'localhost'
 port = 5432
 dbname = 'userdb'
