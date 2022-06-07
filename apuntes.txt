@@ -1,0 +1,105 @@
+crear la carpeta del proyecto
+verificar las versiones e instalación de python: python3 --version
+verificar las versiones e instalación de pip:  pip3 --version
+intalar el entorno virtual: pip install virtualenv
+crear carpeta del entorno virtual: python3 -m virtualenv venv
+activar el entorno virtual: source venv/bin/activate
+o mediante la creación de un alias en mi caso avenv (como crear alias en linux y mantenerlo aun cerrando la consola)
+intalar el modulo flask: pip install flask
+importar flask: from flask import flask
+asignar el nombre de la aplicacion, al accesar al home retornar hello world:
+app=Flask(__name__)
+@app.get('/')
+def home():
+    return 'hello world'
+
+if __name__=='__main__':
+    app.run(debug=True)
+instalar postgresql en linux: https://www.youtube.com/watch?v=40uGNsi7ysc
+para usar postgresql: sudo -u postgres psql
+para salir: \q
+
+Psycopg adaptador para python-postgres instalarlo
+postgres=# \c userdb cambia a una base de datos
+postgres=# \l  muestra la bases de datos existentes
+postgres=# \du muestra los roles existentes
+postgres=# \q se sale de postgres
+
+Api endpoints (rutas del backend)
+crear 5 rutas
+1 obtener lista de usuarios
+2 crear un usuario
+3 borrar un usuario con indice
+4 actualizar un usuario con indice
+5 obtener solo un usuario con indice
+
+instalar un cliente que consuma la api recomiendan thunder client para vscode o postman
+
+Create user
+para hacer post debemos mandar en el body los datos,en formato json
+{
+    "username":"julio",
+    "email":"juliorvm1@gmail.com",
+    "password":"mipassword"
+}
+se importa de flask request
+se puede realizar un archivo de dependencias requirements.
+pip freeze para ver las dependencias del proyecto
+pip freeze > requirements.txt para guardar las dependencias en un archivo txt
+pip install -r requirements.txt  para instlar las dependencias y pueda ser usado en otra pc
+se puede inicializar un repositorio de git
+se agrega un repositorio remoto creado en la pagina de github
+se creo un token para autentificarse
+se cambia la rama a main
+se hace un pull
+se añaden archivos y se hace un comit
+se hace un sush origin main
+
+al insertar un nuevo usuario existe la opcion en postgres de retornar el registro que se inserto
+añadiendo RETURNING *
+al hacerlo podemos asignar una variable usando el curso y la función fetchone() la cual devuelve una tupla
+si se quiere que retorne un diccionario tenemos que importa de psycopg2 el modulo extras
+al obtener el cursor se debe de pasar como parametro cursor_factory=extras.RealDictCursor 
+agregar de flask jsonify que permite convertir un diccionario en un objeto json
+instalar el paquete con pip install cryptography
+se actualizan el archivo de requerimientos con pip freze
+se importa de cryptography.fernet import Fernet que sirve para generar una clave
+Frontend setup
+archivo main.css
+archivo main.js
+archivo index.html
+css de bootswatch
+
+ Create user
+listar los usuarios
+listar usuarios depues de insertarlos
+eliminar usuarios
+editar usuarios
+desplegar la aplicación
+instalar python dotenv para usar variables de entorno
+crear un archivo .env donde se anotan las variables de conexion
+se elimina del app.py los datos de conexion
+se ignoran en gitignore el archivo .env
+instalar gunicorn  permite servir aplicaciones
+crear un archivo Procfile para decirle a heroku cual modulo va a ejecutar
+crear un archivo de dependencias con pip freeze requirements.txt
+crear una app en heroku
+instalar CLI para la linea de comandos con heroku
+seguir las instrucciones para hacer el deploy
+
+
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> postgres-flask-javascript
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached postgres-flask-javascript
+hint:
+hint: See "git help submodule" for more information.
+
+
