@@ -1,4 +1,5 @@
-from json import load
+#Tutorial de video youtube: https://www.youtube.com/watch?v=Qqgry8mezC8
+# from json import load
 from flask import Flask, request, jsonify, send_file
 from psycopg2 import connect, extras
 from cryptography.fernet import Fernet
