@@ -1,5 +1,29 @@
 #Tutorial de video youtube: https://www.youtube.com/watch?v=Qqgry8mezC8
 # from json import load
+
+#El archivo requirements.txt almacena la dependencias que se necesitan instalar para que el proyecto pueda funcionar,al
+#realizar el despliegue el servicio en automático hace su instalación
+
+#El archivo Procfile, se usa para indicar cual es el archivo principal de la aplicación lo utiliza heroku
+
+#data base.sql, contiene el script para crear la base de datos, heroku no permite la scripts para crear tablas,
+#se tiene que hacer usando un programa que nos permita conectarnos a la base de datos remota DBeaver en este caso con las
+#credenciales del sitio remoto
+
+
+#el archivo .gitinore contiene las rutas que se desean ignorar a la hora de sibir el repositorio, esta la carpeta vnenv
+#que es la que corresponde al ambiente virtual y el archivo .env que contiene las variables de entorno para conectar a la base de datos
+
+
+#el archivo main.js contiene el código javascript para manipular el archivo index.html con los datos que se envian a la aplicacion
+#y las que se reciben de la aplicacion
+
+
+#main.css es un archivo donde se pueden establecer reglas css personalizadas en este caso se usan reglas de una variante de bootstrap
+#que se llama bootswatch
+
+#index.html contiene la estructrura de la página principal de la aplicación y es modificada por el código javascript
+
 from flask import Flask, request, jsonify, send_file
 from psycopg2 import connect, extras
 from cryptography.fernet import Fernet
